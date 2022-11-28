@@ -92,7 +92,7 @@ In this exercise you will create the location where resources will start and end
 
 1. Click **Save and Close**.
 
-1. Click **+ New Bookable Resource Characteristic**.
+1. Click **+ New Resource Characteristic**.
 
 1. Select the **[your prefix] CISM** you created in the previous lab for **Characteristic**.
 
