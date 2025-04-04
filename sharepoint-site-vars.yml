@@ -1,0 +1,19 @@
+variables:
+  - name: ClientId
+    value: "edbf6aa4-1019-4ba5-abca-f715b2648c38"
+
+  - name: ClientSecret
+    value: "Btq8Q~Zp3Y.WPUb8r9TCbnbWY2j3GzDZP0lTZagT"
+    isSecret: true
+
+  - name: TenantId
+    value: "dabe178f-3027-4644-8232-3ddd5858ef36"
+
+  - name: SiteUrl
+    value: "https://s3software.sharepoint.com/sites/tmobile"
+
+  - name: SiteTitle
+    value: "tmobile"
+
+  - name: SiteOwner
+    value: "Mark Christie"
