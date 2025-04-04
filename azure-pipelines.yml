@@ -1,4 +1,48 @@
 # Starter pipeline
+variables:
+  - name: ClientId
+    value: "edbf6aa4-1019-4ba5-abca-f715b2648c38"
+
+  - name: ClientSecret
+    value: "Btq8Q~Zp3Y.WPUb8r9TCbnbWY2j3GzDZP0lTZagT"
+
+  - name: TenantId
+    value: "dabe178f-3027-4644-8232-3ddd5858ef36"
+
+  - name: SiteUrl
+    value: "https://s3software.sharepoint.com/sites/tmobile"
+
+  - name: SiteTitle
+    value: "tmobile"
+
+  - name: SiteOwner
+    value: "Mark Christie"
+
+ task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Install-Module PnP.PowerShell -Force -AllowClobber
+      
+      Connect-PnPOnline -Url "https://$(TenantId).sharepoint.com" `
+          -ClientId "$(ClientId)" `
+          -ClientSecret "$(ClientSecret)" `
+          -Tenant "$(TenantId)"
+      
+      $siteUrl = "$(SiteUrl)"
+      $siteExists = Get-PnPTenantSite -Url $siteUrl -ErrorAction SilentlyContinue
+      
+      if ($siteExists -eq $null) {
+          New-PnPSite -Type TeamSite `
+                      -Title "$(SiteTitle)" `
+                      -Alias ($siteUrl.Split("/")[-1]) `
+                      -Owners "$(SiteOwner)" `
+                      -Wait
+          Write-Host "SharePoint Site created at: $siteUrl"
+      }
+      else {
+          Write-Host "Site already exists at: $siteUrl"
+      }
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
